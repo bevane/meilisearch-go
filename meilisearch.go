@@ -42,8 +42,8 @@ func New(host string, options ...Option) ServiceManager {
 func Connect(host string, options ...Option) (ServiceManager, error) {
 	meili := New(host, options...)
 
-	if !meili.IsHealthy() {
-		return nil, ErrConnectingFailed
+	if isHealthy, err := meili.IsHealthy(); !isHealthy {
+		return nil, err
 	}
 
 	return meili, nil
@@ -630,9 +630,9 @@ func (m *meilisearch) CreateSnapshotWithContext(ctx context.Context) (*TaskInfo,
 	return resp, nil
 }
 
-func (m *meilisearch) IsHealthy() bool {
+func (m *meilisearch) IsHealthy() (bool, error) {
 	res, err := m.HealthWithContext(context.Background())
-	return err == nil && res.Status == "available"
+	return err == nil && res.Status == "available", err
 }
 
 func (m *meilisearch) Close() {

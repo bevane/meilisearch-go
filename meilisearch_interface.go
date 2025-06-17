@@ -111,7 +111,7 @@ type ServiceReader interface {
 	HealthWithContext(ctx context.Context) (*Health, error)
 
 	// IsHealthy checks if the Meilisearch server is healthy.
-	IsHealthy() bool
+	IsHealthy() (bool, error)
 }
 
 type KeyManager interface {
