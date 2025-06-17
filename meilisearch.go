@@ -42,6 +42,7 @@ func New(host string, options ...Option) ServiceManager {
 func Connect(host string, options ...Option) (ServiceManager, error) {
 	meili := New(host, options...)
 
+	fmt.Println("debug: modifed")
 	if isHealthy, err := meili.IsHealthy(); !isHealthy {
 		return nil, err
 	}
