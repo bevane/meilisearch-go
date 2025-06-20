@@ -1,4 +1,4 @@
-module github.com/meilisearch/meilisearch-go
+module github.com/bevane/meilisearch-go
 
 go 1.16
 
